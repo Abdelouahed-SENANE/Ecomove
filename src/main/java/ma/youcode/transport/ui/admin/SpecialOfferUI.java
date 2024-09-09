@@ -27,10 +27,10 @@ public class SpecialOfferUI {
     private final ContractRepository contractRepository;
 
     public SpecialOfferUI()  {
-        this.sc = new Scanner(System.in);
-        this.service = new SpecialOfferServiceImp();
-        this.contractUI = new ContractUI();
-        this.validator = new Validator();
+        sc = new Scanner(System.in);
+        service = new SpecialOfferServiceImp();
+        contractUI = new ContractUI();
+        validator = new Validator();
         this.contractRepository = new ContractRepositoryImp();
     }
 
