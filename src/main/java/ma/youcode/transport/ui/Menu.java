@@ -4,6 +4,8 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import ma.youcode.transport.ui.admin.*;
+import ma.youcode.transport.ui.admin.CostumerMenu;
+import ma.youcode.transport.ui.auth.AuthMenu;
 
 public class Menu {
 
@@ -21,9 +23,8 @@ public class Menu {
     public Menu start(Menu menu) {
         do {
             System.out.println("\n================== Transport app Menu ==================");
-            System.out.println("1. Login as a admin");
-            System.out.println("2. Login as a costumer");
-            System.out.println("3. Register as a costumer");
+            System.out.println("1. Dashboard Admin");
+            System.out.println("2. Authentication");
             System.out.println("0. Exit");
             System.out.println("================== Transport app Menu ==================\n");
             System.out.println("Choose an option :");
@@ -35,9 +36,7 @@ public class Menu {
                     while (true) {
                        System.out.println("Enter your username : ");
                         String username = sc.next().trim();
-                        System.out.println("Enter your password : ");
-                        String password = sc.next().trim();
-                        if (username.equals("admin") && password.equals("1234")) {
+                        if (username.equals("admin")) {
                             AdminMenu.start(menu);
                             break;
                         }else {
@@ -46,7 +45,7 @@ public class Menu {
                     }
                 break;
                 case 2:
-                    System.out.println(" Login Costumer: ");
+                    AuthMenu.start(menu);
                 break;
                 case 3:
                     System.out.println("Enter your username : ");
@@ -63,7 +62,7 @@ public class Menu {
 
     public int getChoice() {
 
-        while (this.choice < 0 || this.choice > 3) {
+        while (this.choice < 0 || this.choice > 2) {
             System.out.println("Enter Number Between 0 - 3");
             if (sc.hasNextInt()) {
                 this.choice = sc.nextInt();
