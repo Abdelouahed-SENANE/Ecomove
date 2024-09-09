@@ -1,4 +1,4 @@
-package ma.youcode.transport.ui.SubMenu;
+package ma.youcode.transport.ui.admin;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -21,7 +21,7 @@ public class PartnerUI {
     private final Scanner sc;
     private final Validator validator;
 
-    public PartnerUI() throws SQLException {
+    public PartnerUI()  {
         this.sc = new Scanner(System.in);
         this.partnerService = new PartnersServiceImp();
         this.validator = new Validator();
@@ -43,7 +43,7 @@ public class PartnerUI {
         }
     }
 
-    public Menu start(Menu menu) throws SQLException {
+    public Menu start(Menu menu)  {
         do {
             System.out.println("\n================ Manage Partners ================");
             System.out.println("1. Add new partner");
@@ -178,7 +178,7 @@ public class PartnerUI {
         return menu;
     }
 
-    public void displayPartners() throws SQLException {
+    public void displayPartners()  {
         List<Partner> partnersList = partnerService.getAllPartners();
     
         String[] headers = {

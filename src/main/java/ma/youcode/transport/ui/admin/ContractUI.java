@@ -1,4 +1,4 @@
-package ma.youcode.transport.ui.SubMenu;
+package ma.youcode.transport.ui.admin;
 
 import java.lang.reflect.Field;
 import java.sql.SQLException;
@@ -47,7 +47,7 @@ public class ContractUI {
         }
     }
 
-    public Menu start(Menu menu) throws SQLException {
+    public Menu start(Menu menu)  {
         do {
             System.out.println("\n================ Manage Contracts ================");
             System.out.println("1. Add new contract");

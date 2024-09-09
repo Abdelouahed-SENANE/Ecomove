@@ -129,7 +129,7 @@ public class PartnerRepositoryImp implements ma.youcode.transport.repository.Par
     }
 
     @Override
-    public List<Partner> findAllPartners() throws SQLException {
+    public List<Partner> findAllPartners() {
         List<Partner> partners = new ArrayList<>();
 
         try {

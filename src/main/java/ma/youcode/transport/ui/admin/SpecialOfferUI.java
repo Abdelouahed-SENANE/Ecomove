@@ -1,4 +1,4 @@
-package ma.youcode.transport.ui.SubMenu;
+package ma.youcode.transport.ui.admin;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -26,7 +26,7 @@ public class SpecialOfferUI {
     private final ContractUI contractUI;
     private final ContractRepository contractRepository;
 
-    public SpecialOfferUI() throws SQLException {
+    public SpecialOfferUI()  {
         this.sc = new Scanner(System.in);
         this.service = new SpecialOfferServiceImp();
         this.contractUI = new ContractUI();
@@ -50,7 +50,7 @@ public class SpecialOfferUI {
         }
     }
 
-    public Menu start(Menu menu) throws SQLException {
+    public Menu start(Menu menu) {
         do {
             System.out.println("\n================ Manage Special Offers ================");
             System.out.println("1. Add new special offer");
@@ -203,7 +203,7 @@ public class SpecialOfferUI {
         return menu;
     }
 
-    private void displaySpecialOffers() throws SQLException {
+    private void displaySpecialOffers()  {
         List<SpecialOffer> specialOffersList = service.getAllSpecialOffers();
                     
         String[] headers = {

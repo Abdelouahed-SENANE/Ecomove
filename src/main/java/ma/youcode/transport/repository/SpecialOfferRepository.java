@@ -7,7 +7,7 @@ import ma.youcode.transport.entity.SpecialOffer;
 
 public interface SpecialOfferRepository {
 
-    SpecialOffer save(SpecialOffer specialOffer) throws SQLException;
+    SpecialOffer save(SpecialOffer specialOffer);
 
     SpecialOffer update(SpecialOffer specialOffer);
 
@@ -15,5 +15,5 @@ public interface SpecialOfferRepository {
 
     SpecialOffer findSpecialOfferById(String offerId);
 
-    List<SpecialOffer> findAllSpecialOffers() throws SQLException;
+    List<SpecialOffer> findAllSpecialOffers();
 }

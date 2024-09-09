@@ -1,4 +1,4 @@
-package ma.youcode.transport.ui.SubMenu;
+package ma.youcode.transport.ui.admin;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -48,7 +48,7 @@ public class TicketUI {
         }
     }
 
-    public Menu start(Menu menu) throws SQLException {
+    public Menu start(Menu menu) {
         do {
             System.out.println("\n================ Manage Tickets ================");
             System.out.println("1. Add new ticket");
