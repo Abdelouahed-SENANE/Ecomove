@@ -12,18 +12,18 @@ import java.sql.SQLException;
 public class PartnersServiceImp implements PartenerService {
     private PartnerRepository repository;
 
-    public PartnersServiceImp() throws SQLException {
+    public PartnersServiceImp() {
         repository = new PartnerRepositoryImp();
     }
 
     @Override
-    public Partner addPartner(Partner partner) throws SQLException {
+    public Partner addPartner(Partner partner) {
         Partner newPartner =  repository.save(partner);
         return  newPartner;
     }
 
     @Override
-    public Partner updatePartner(Partner partner) throws SQLException {
+    public Partner updatePartner(Partner partner) {
 
         Partner updatedPartner = repository.update(partner);
         if (updatedPartner != null) {
@@ -42,7 +42,7 @@ public class PartnersServiceImp implements PartenerService {
     }
 
     @Override
-    public List<Partner> getAllPartners() throws SQLException {
+    public List<Partner> getAllPartners() {
             List<Partner> partners = repository.findAllPartners();
 
             if (partners.size() > 0) {
@@ -53,7 +53,7 @@ public class PartnersServiceImp implements PartenerService {
     }
 
     @Override
-    public Partner  deletePartner(String partnerId) throws SQLException {
+    public Partner  deletePartner(String partnerId)  {
         
         Partner partner = null;
         if (!partnerId.isEmpty()) {

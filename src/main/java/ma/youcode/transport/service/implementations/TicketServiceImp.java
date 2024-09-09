@@ -48,7 +48,7 @@ public class TicketServiceImp implements ma.youcode.transport.service.TicketServ
     }
 
     @Override
-    public Ticket deleteTicket(String ticketId) throws SQLException {
+    public Ticket deleteTicket(String ticketId)  {
         Ticket ticket = ticketRepository.findTicketById(ticketId);
         if (ticket != null) {
             ticketRepository.delete(ticket);

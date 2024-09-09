@@ -7,7 +7,7 @@ import ma.youcode.transport.entity.Partner;
 
 public interface PartnerRepository {
 
-    Partner save(Partner partner) throws SQLException;
+    Partner save(Partner partner);
 
     Partner update(Partner partner);
 
@@ -15,6 +15,6 @@ public interface PartnerRepository {
 
     Partner findPartnerById(String partnerId);
 
-    List<Partner> findAllPartners() throws SQLException;
+    List<Partner> findAllPartners();
 
 }

@@ -1,11 +1,15 @@
-package ma.youcode.transport.ui;
+package ma.youcode.transport.ui.admin;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 
-import ma.youcode.transport.ui.admin.*;
+import ma.youcode.transport.ui.Menu;
+import ma.youcode.transport.ui.admin.ContractUI;
+import ma.youcode.transport.ui.admin.PartnerUI;
+import ma.youcode.transport.ui.admin.SpecialOfferUI;
+import ma.youcode.transport.ui.admin.TicketUI;
 
-public class Menu {
+public class CostumerMenu  {
 
     private final Scanner sc;
     private PartnerUI partnerUI;
@@ -14,16 +18,18 @@ public class Menu {
     private TicketUI ticketsUI;
     private int choice;
 
-    public Menu()  {
+    public CostumerMenu()  {
         this.sc = new Scanner(System.in);
+
     }
 
     public Menu start(Menu menu) {
         do {
             System.out.println("\n================== Transport app Menu ==================");
-            System.out.println("1. Login as a admin");
-            System.out.println("2. Login as a costumer");
-            System.out.println("3. Register as a costumer");
+            System.out.println("1. Manage Partners");
+            System.out.println("2. Manage Contracts");
+            System.out.println("3. Manage Special Offers");
+            System.out.println("4. Manage Tickets");
             System.out.println("0. Exit");
             System.out.println("================== Transport app Menu ==================\n");
             System.out.println("Choose an option :");
@@ -32,24 +38,13 @@ public class Menu {
 
             switch (this.choice) {
                 case 1:
-                    while (true) {
-                       System.out.println("Enter your username : ");
-                        String username = sc.next().trim();
-                        System.out.println("Enter your password : ");
-                        String password = sc.next().trim();
-                        if (username.equals("admin") && password.equals("1234")) {
-                            AdminMenu.start(menu);
-                            break;
-                        }else {
-                            System.out.println("Invalid username or password , please try again");
-                        }
-                    }
-                break;
+                    System.out.println("Costumer: new access ");
+                    break;
                 case 2:
-                    System.out.println(" Login Costumer: ");
-                break;
+                    break;
                 case 3:
-                    System.out.println("Enter your username : ");
+                    break;
+                case 4:
                     break;
                 case 0:
                     break;
@@ -63,8 +58,8 @@ public class Menu {
 
     public int getChoice() {
 
-        while (this.choice < 0 || this.choice > 3) {
-            System.out.println("Enter Number Between 0 - 3");
+        while (this.choice < 0 || this.choice > 4) {
+            System.out.println("Enter Number Between 0 - 4");
             if (sc.hasNextInt()) {
                 this.choice = sc.nextInt();
                 if (this.choice < 0 || this.choice > 0) {

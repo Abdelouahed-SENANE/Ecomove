@@ -6,9 +6,9 @@ import java.util.List;
 import ma.youcode.transport.entity.SpecialOffer;
 
 public interface SpecialOfferService {
-    SpecialOffer addSpecialOffer(SpecialOffer specialOffer) throws SQLException;
-    SpecialOffer updateSpecialOffer(SpecialOffer specialOffer) throws SQLException;
-    List<SpecialOffer> getAllSpecialOffers() throws SQLException;
-    SpecialOffer deleteSpecialOffer(String offerId) throws SQLException;
-    SpecialOffer getSpecialOffer(String offerId) throws SQLException;
+    SpecialOffer addSpecialOffer(SpecialOffer specialOffer) ;
+    SpecialOffer updateSpecialOffer(SpecialOffer specialOffer);
+    List<SpecialOffer> getAllSpecialOffers();
+    SpecialOffer deleteSpecialOffer(String offerId);
+    SpecialOffer getSpecialOffer(String offerId);
 }

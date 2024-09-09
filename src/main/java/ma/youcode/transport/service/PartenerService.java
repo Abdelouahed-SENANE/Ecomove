@@ -6,9 +6,9 @@ import java.util.List;
 import ma.youcode.transport.entity.Partner;
 
 public interface PartenerService {
-    public Partner addPartner(Partner partner) throws SQLException;
-    public Partner updatePartner(Partner partner) throws SQLException;
-    public List<Partner> getAllPartners() throws SQLException;
-    public Partner deletePartner(String PartnerId) throws SQLException;
-    public Partner getPartner(String partnerId) throws SQLException;
+    public Partner addPartner(Partner partner);
+    public Partner updatePartner(Partner partner);
+    public List<Partner> getAllPartners();
+    public Partner deletePartner(String PartnerId);
+    public Partner getPartner(String partnerId);
 }
