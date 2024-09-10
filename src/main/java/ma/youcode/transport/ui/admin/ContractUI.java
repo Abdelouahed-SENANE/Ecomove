@@ -1,7 +1,6 @@
 package ma.youcode.transport.ui.admin;
 
 import java.lang.reflect.Field;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
@@ -66,8 +65,8 @@ public class ContractUI {
                     Contract newContract = new Contract();
                     newContract.setContractId(UUID.randomUUID().toString());
 
-                    newContract.setStartingDate(validator.getValidTimestampInput("Enter Starting Date (YYYY-MM-DD HH:MM:SS): "));
-                    newContract.setEndDate(validator.getValidTimestampInput("Enter End Date (YYYY-MM-DD HH:MM:SS): "));
+                    newContract.setStartingDate(validator.getValidTimestampInput("Contract starting date"));
+                    newContract.setEndDate(validator.getValidTimestampInput(" Contract ending date "));
                     newContract.setSpecialRate(validator.getValidDoubleInput("Enter Special Rate: ",
                             "Please enter a valid rate for the Special Rate."));
                     newContract.setAgreementConditions(validator.getValidStringInput("Enter Agreement Conditions: ",
@@ -126,8 +125,8 @@ public class ContractUI {
                         }
                     }
                 
-                    existingContract.setStartingDate(validator.getValidTimestampInput("Enter Starting Date (YYYY-MM-DD HH:MM:SS): "));
-                    existingContract.setEndDate(validator.getValidTimestampInput("Enter End Date (YYYY-MM-DD HH:MM:SS): "));
+                    existingContract.setStartingDate(validator.getValidTimestampInput("Contract updated starting date"));
+                    existingContract.setEndDate(validator.getValidTimestampInput(" Contract updated ending date "));
                     existingContract.setSpecialRate(validator.getValidDoubleInput("Enter Special Rate: ",
                             "Please enter a valid rate for the Special Rate."));
                     existingContract.setAgreementConditions(validator.getValidStringInput("Enter Agreement Conditions: ",

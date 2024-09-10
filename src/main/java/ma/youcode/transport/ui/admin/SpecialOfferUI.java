@@ -73,8 +73,8 @@ public class SpecialOfferUI {
                             "Please enter a correct value for the Offer Name."));
                     newSpecialOffer.setOfferDescription(validator.getValidStringInput("Enter Offer Description: ",
                             "Please enter a correct value for the Offer Description."));
-                    newSpecialOffer.setStartingDate(validator.getValidTimestampInput("Enter Starting Date (YYYY-MM-DD HH:MM:SS): "));
-                    newSpecialOffer.setEndDate(validator.getValidTimestampInput("Enter End Date (YYYY-MM-DD HH:MM:SS): "));
+                    newSpecialOffer.setStartingDate(validator.getValidTimestampInput("Special offer starting date "));
+                    newSpecialOffer.setEndDate(validator.getValidTimestampInput("Special offer ending date "));
                     newSpecialOffer.setDiscountType(validator.choiceOption(DiscountType.class));
                     sc.nextLine();
 
@@ -138,8 +138,8 @@ public class SpecialOfferUI {
                             "Please enter a correct value for the Offer Name."));
                     existingSpecialOffer.setOfferDescription(validator.getValidStringInput("Enter Offer Description: ",
                             "Please enter a correct value for the Offer Description."));
-                    existingSpecialOffer.setStartingDate(validator.getValidTimestampInput("Enter Starting Date (YYYY-MM-DD HH:MM:SS): "));
-                    existingSpecialOffer.setEndDate(validator.getValidTimestampInput("Enter End Date (YYYY-MM-DD HH:MM:SS): "));
+                    existingSpecialOffer.setStartingDate(validator.getValidTimestampInput("Special offer updated Starting date"));
+                    existingSpecialOffer.setEndDate(validator.getValidTimestampInput("Special offer updated Ending date"));
                     existingSpecialOffer.setDiscountType(validator.choiceOption(DiscountType.class));
                     existingSpecialOffer.setDiscountValue(validator.getValidDoubleInput("Enter Discount Value: ",
                             "Please enter a valid discount value."));

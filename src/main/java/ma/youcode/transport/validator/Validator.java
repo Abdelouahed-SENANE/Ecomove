@@ -1,8 +1,11 @@
 package ma.youcode.transport.validator;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /**
@@ -10,8 +13,8 @@ import java.util.Scanner;
  */
 public class Validator {
     private Scanner sc;
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
     public Validator() {
         sc = new Scanner(System.in);
     }
@@ -37,19 +40,51 @@ public class Validator {
 
     /**
      * Gets a valid timestamp input from the user.
-     * @param prompt The input prompt message.
+     * @param entity The input prompt message.
      * @return A valid timestamp.
      */
-    public Timestamp getValidTimestampInput(String prompt) {
+    public LocalDate getValidTimestampInput(String entity) {
         while (true) {
-            System.out.print(prompt);
-            String input = sc.nextLine();
+            int year;
+            while (true) {
+                System.out.print("Add year for this " + entity + ": \n");
+                 year = sc.nextInt();
+                LocalDate currentDate = LocalDate.now();
+                int currentYear = currentDate.getYear();
+                if (year < currentYear) {
+                    System.out.println("Incorrect year, Please try again.");
+                }else {
+                    break;
+                }
+            }
+            int month;
+            while (true) {
+                System.out.print("Add month for this " + entity + ": \n");
+                month = sc.nextInt();
+                if (month < 1 || month > 12) {
+                    System.out.println("Incorrect month, Try again.");
+                }else {
+                    break;
+                }
+            }
+            int day;
+            while (true) {
+                System.out.print("Add day for this " + entity + ": \n");
+                day = sc.nextInt();
+                sc.nextLine();
+                if (day < 1 || day > 31) {
+                    System.out.println("Incorrect day, Try again.");
+                }else {
+                    break;
+                }
+            }
             try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-                dateFormat.setLenient(false);
-                return new Timestamp(dateFormat.parse(input).getTime());
-            } catch (ParseException e) {
-                System.out.println("Invalid date format. Please enter the date in the format " + DATE_FORMAT + ".");
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd HH:mm.");
+            }catch (Exception e) {
+                System.out.println("Invalid input. Please enter numeric values.");
+                sc.next();
             }
         }
     }

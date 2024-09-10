@@ -1,9 +1,7 @@
 package ma.youcode.transport.repository.implementations;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,8 +30,8 @@ public class SpecialOfferRepositoryImp implements ma.youcode.transport.repositor
             stmt.setString(1, specialOffer.getOfferId());
             stmt.setString(2, specialOffer.getOfferName());
             stmt.setString(3, specialOffer.getOfferDescription());
-            stmt.setTimestamp(4, specialOffer.getStartingDate());
-            stmt.setTimestamp(5, specialOffer.getEndDate());
+            stmt.setDate(4, Date.valueOf(specialOffer.getStartingDate()));
+            stmt.setDate(5, Date.valueOf(specialOffer.getEndDate()));
             stmt.setObject(6, specialOffer.getDiscountType().name(), java.sql.Types.OTHER);
             stmt.setDouble(7, specialOffer.getDiscountValue());
             stmt.setString(8, specialOffer.getConditions());
@@ -60,8 +58,8 @@ public class SpecialOfferRepositoryImp implements ma.youcode.transport.repositor
 
             stmt.setString(1, specialOffer.getOfferName());
             stmt.setString(2, specialOffer.getOfferDescription());
-            stmt.setTimestamp(3, specialOffer.getStartingDate());
-            stmt.setTimestamp(4, specialOffer.getEndDate());
+            stmt.setDate(3, Date.valueOf(specialOffer.getStartingDate()));
+            stmt.setDate(4, Date.valueOf(specialOffer.getEndDate()));
             stmt.setObject(5, specialOffer.getDiscountType().name(), java.sql.Types.OTHER);
             stmt.setDouble(6, specialOffer.getDiscountValue());
             stmt.setString(7, specialOffer.getConditions());
@@ -110,8 +108,8 @@ public class SpecialOfferRepositoryImp implements ma.youcode.transport.repositor
                 specialOffer.setOfferId(rs.getString("offerid"));
                 specialOffer.setOfferName(rs.getString("offername"));
                 specialOffer.setOfferDescription(rs.getString("offerdescription"));
-                specialOffer.setStartingDate(rs.getTimestamp("startingdate"));
-                specialOffer.setEndDate(rs.getTimestamp("enddate"));
+                specialOffer.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                specialOffer.setEndDate(rs.getDate("enddate").toLocalDate());
                 specialOffer.setDiscountValue(rs.getDouble("discountvalue"));
                 specialOffer.setConditions(rs.getString("conditions"));
 
@@ -149,8 +147,8 @@ public class SpecialOfferRepositoryImp implements ma.youcode.transport.repositor
                 specialOffer.setOfferId(rs.getString("offerid"));
                 specialOffer.setOfferName(rs.getString("offername"));
                 specialOffer.setOfferDescription(rs.getString("offerdescription"));
-                specialOffer.setStartingDate(rs.getTimestamp("startingdate"));
-                specialOffer.setEndDate(rs.getTimestamp("enddate"));
+                specialOffer.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                specialOffer.setEndDate(rs.getDate("enddate").toLocalDate());
                 specialOffer.setDiscountValue(rs.getDouble("discountvalue"));
                 specialOffer.setConditions(rs.getString("conditions"));
 
