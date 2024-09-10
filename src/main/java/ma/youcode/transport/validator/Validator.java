@@ -157,4 +157,33 @@ public class Validator {
             sc.nextLine();
         }
     }
+
+
+    public  String isValidEmail(String label , String errorMessage) {
+        String input;
+        String  EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        while (true) {
+            System.out.print(label);
+            input = sc.nextLine().trim();
+            if (input.matches(EMAIL_REGEX)) {
+                return input;
+            }else {
+                System.out.println(errorMessage);
+            }
+        }
+    }
+    public String isValidPhoneNumber(String label , String errorMessage) {
+        String input;
+        String  PHONE_REGEX = "^0[5-7]\\d{8}$";
+        while (true) {
+            System.out.print(label);
+            input = sc.nextLine().trim();
+            if (input.matches(PHONE_REGEX)) {
+                return input;
+            }else {
+                System.out.println(errorMessage);
+            }
+        }
+    }
+
 }

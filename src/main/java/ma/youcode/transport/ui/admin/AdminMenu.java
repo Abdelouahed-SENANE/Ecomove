@@ -14,7 +14,6 @@ public class AdminMenu {
     private static ContractUI contractUI;
     private static SpecialOfferUI specialOfferUI;
     private static TicketUI ticketsUI;
-    private static int choice;
 
     // Static block to initialize static members
     static {
@@ -30,6 +29,7 @@ public class AdminMenu {
 
     // Static start method
     public static Menu start(Menu menu)  {
+        int choice;
         do {
             System.out.println("\n================== Transport app Menu ==================");
             System.out.println("1. Manage Partners");
@@ -67,6 +67,7 @@ public class AdminMenu {
 
     // Static method for getting a valid choice
     public static int getChoice() {
+        int choice = -1;
         while (true) {
             if (sc.hasNextInt()) {
                 choice = sc.nextInt();

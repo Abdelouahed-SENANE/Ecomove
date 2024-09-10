@@ -4,7 +4,6 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 import ma.youcode.transport.ui.admin.*;
-import ma.youcode.transport.ui.admin.CostumerMenu;
 import ma.youcode.transport.ui.auth.AuthMenu;
 
 public class Menu {
@@ -47,9 +46,6 @@ public class Menu {
                 case 2:
                     AuthMenu.start(menu);
                 break;
-                case 3:
-                    System.out.println("Enter your username : ");
-                    break;
                 case 0:
                     break;
                 default:
@@ -63,7 +59,7 @@ public class Menu {
     public int getChoice() {
 
         while (this.choice < 0 || this.choice > 2) {
-            System.out.println("Enter Number Between 0 - 3");
+            System.out.println("Enter Number Between 0 - 2");
             if (sc.hasNextInt()) {
                 this.choice = sc.nextInt();
                 if (this.choice < 0 || this.choice > 0) {

@@ -62,7 +62,7 @@ public class TicketUI {
             this.choice = getChoice();
 
             switch (this.choice) {
-                case 1: // Add new ticket
+                case 1:
                     System.out.println("You chose option 1: Add new ticket\n");
                     Ticket newTicket = new Ticket();
                     newTicket.setTicketId(UUID.randomUUID().toString());
@@ -113,7 +113,6 @@ public class TicketUI {
                         }
                     }
                 
-                    // Collect updated details for the ticket
                     existingTicket.setTransportationType(validator.choiceOption(TransportationType.class));
                     existingTicket.setBoughtFor(validator.getValidDoubleInput("Enter bought price: ", "Please enter a valid bought price."));
                     existingTicket.setSellingPrice(validator.getValidDoubleInput("Enter selling price: ", "Please enter a valid selling price."));
@@ -162,7 +161,7 @@ public class TicketUI {
                     this.displayTickets();
                     break;
 
-                case 0: // Go back
+                case 0:
                     System.out.println("Back to main menu \n");
                     break;
 

@@ -1,6 +1,6 @@
 package ma.youcode.transport.entity;
 
-public class Costumer {
+public class Passenger {
     private String firstName;
     private String familyName;
     private String email;

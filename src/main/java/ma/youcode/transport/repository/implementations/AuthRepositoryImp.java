@@ -1,8 +1,7 @@
 package ma.youcode.transport.repository.implementations;
 
 import ma.youcode.transport.config.Database;
-import ma.youcode.transport.entity.Contract;
-import ma.youcode.transport.entity.Costumer;
+import ma.youcode.transport.entity.Passenger;
 import ma.youcode.transport.repository.AuthRepository;
 
 import java.sql.Connection;
@@ -18,50 +17,73 @@ public class AuthRepositoryImp implements AuthRepository {
     }
 
     @Override
-    public Costumer save(Costumer costumer) {
-
-        String sql = "INSERT INTO costumer (email , firstname , familyname , phone) VALUES (?, ?, ? , ?)";
+    public Passenger save(Passenger passenger) {
+        String sql = "INSERT INTO passengers (email , firstname , familyname , phonenumber) VALUES (?, ?, ? , ?)";
         try{
             Connection connection = database.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, passenger.getEmail());
+            pstmt.setString(2, passenger.getFirstName());
+            pstmt.setString(3, passenger.getFamilyName());
+            pstmt.setString(4, passenger.getPhone());
+
             int affetedRow = pstmt.executeUpdate();
             if (affetedRow > 0) {
-                return costumer;
+                return passenger;
             }
-            return null;
-
         }catch (SQLException e) {
             e.printStackTrace();
-            return null;
 
         }
+        return null;
     }
 
     @Override
-    public Costumer findByEmail(String email) {
-        Costumer costumer = null;
-        String sql = "SELECT * FROM costumer WHERE email = ?";
+    public Passenger findByEmail(String email) {
+        Passenger passenger = null;
+        String sql = "SELECT * FROM passengers WHERE email = ?";
         try {
             Connection connection = database.getConnection();
             PreparedStatement pstmt = connection.prepareStatement(sql);
-
+            pstmt.setString(1, email);
             ResultSet rs = pstmt.executeQuery();
+
             while (rs.next()) {
-                costumer = new Costumer();
-                costumer.setEmail(rs.getString("email"));
-                costumer.setFamilyName(rs.getString("familyname"));
-                costumer.setFirstName(rs.getString("firstname"));
-                costumer.setPhone(rs.getString("phone"));
-                return costumer;
+                passenger = new Passenger();
+                passenger.setEmail(rs.getString("email"));
+                passenger.setFamilyName(rs.getString("familyname"));
+                passenger.setFirstName(rs.getString("firstname"));
+                passenger.setPhone(rs.getString("phonenumber"));
+                return passenger;
             }
         }catch (SQLException e) {
             e.printStackTrace();
         }
-        return costumer;
+        return passenger;
     }
 
     @Override
     public Boolean existsByEmail(String email) {
         return Optional.ofNullable(this.findByEmail(email)).isPresent();
+    }
+
+    @Override
+    public Passenger update(Passenger passenger) {
+        String sql = "UPDATE passengers SET firstname = ?, familyname = ?  , phonenumber = ? WHERE email = ?";
+        try {
+            Connection connection = database.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(sql);
+            pstmt.setString(1, passenger.getFirstName());
+            pstmt.setString(2, passenger.getFamilyName());
+            pstmt.setString(3, passenger.getPhone());
+            pstmt.setString(4, passenger.getEmail());
+            int affetedRow = pstmt.executeUpdate();
+            if (affetedRow > 0) {
+                return passenger;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

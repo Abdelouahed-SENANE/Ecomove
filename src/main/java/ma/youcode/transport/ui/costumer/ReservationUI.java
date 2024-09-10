@@ -1,19 +1,23 @@
-package ma.youcode.transport.ui.costumer;
+package ma.youcode.transport.ui.admin;
 
 import java.util.Scanner;
-import ma.youcode.transport.ui.Menu;
-import ma.youcode.transport.ui.admin.ReservationUI;
 
-public class CostumerMenu  {
+import ma.youcode.transport.ui.Menu;
+import ma.youcode.transport.utils.Session;
+
+public class ReservationUI {
 
     private static  final Scanner sc = new Scanner(System.in);
     private static int choice;
 
+
+
     public static Menu start(Menu menu) {
         do {
             System.out.println("\n================== Costumer Menu ==================");
-            System.out.println("1. Manage Reservations");
-            System.out.println("2. Update my profile");
+            System.out.println("1. Make Reservation");
+            System.out.println("2. View my Reservations");
+            System.out.println("3. Cancel Reservation");
             System.out.println("0. Exit");
             System.out.println("================== Costumer Menu ==================\n");
             System.out.println("Choose an option :");
@@ -22,13 +26,11 @@ public class CostumerMenu  {
 
             switch (choice) {
                 case 1:
-                    ReservationUI.start(menu);
+                    System.out.println( "Authenticated User is : " + Session.getLoggedEmail());
                     break;
                 case 2:
-                    ProfileUI.start(menu);
                     break;
                 case 0:
-                    System.out.println("Goodbye!");
                     break;
                 default:
                     break;
@@ -39,11 +41,12 @@ public class CostumerMenu  {
     }
 
     public static int getChoice() {
-        while (choice < 0 || choice > 2) {
-            System.out.println("Enter Number Between 0 - 2");
+
+        while (choice < 0 || choice > 3) {
+            System.out.println("Enter Number Between 0 - 3");
             if (sc.hasNextInt()) {
                 choice = sc.nextInt();
-                if (choice < 0 || choice > 2) {
+                if (choice < 0 || choice > 3) {
                     System.out.println("Number out of range. Please try again.");
                 }
             } else {
