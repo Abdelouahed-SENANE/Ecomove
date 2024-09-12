@@ -1,13 +1,12 @@
 package ma.youcode.transport.ui.admin;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
 import ma.youcode.transport.entity.Contract;
+import ma.youcode.transport.entity.Route;
 import ma.youcode.transport.entity.Ticket;
 import ma.youcode.transport.enums.TicketStatus;
 import ma.youcode.transport.enums.TransportationType;
@@ -62,17 +61,24 @@ public class TicketUI {
             this.choice = getChoice();
 
             switch (this.choice) {
-                case 1: // Add new ticket
+                case 1:
                     System.out.println("You chose option 1: Add new ticket\n");
                     Ticket newTicket = new Ticket();
                     newTicket.setTicketId(UUID.randomUUID().toString());
                     newTicket.setTransportationType(validator.choiceOption(TransportationType.class));
                     newTicket.setBoughtFor(validator.getValidDoubleInput("Enter bought price: ", "Please enter a valid bought price."));
+                    Route routeTickt = new Route();
+                    routeTickt.setDeparture(validator.getValidStringInput("Enter departure: ", "Please enter a valid departure.").toLowerCase());
+                    routeTickt.setDestination(validator.getValidStringInput("Enter destination: ", "Please enter a valid destination.").toLowerCase());
+                    routeTickt.setDistance(validator.getValidDoubleInput("Enter distance: " , "Please enter valid distance"));
+                    newTicket.setRoute(routeTickt);
                     newTicket.setSellingPrice(validator.getValidDoubleInput("Enter selling price: ", "Please enter a valid selling price."));
-                    newTicket.setSoldAt(Timestamp.valueOf(LocalDateTime.now()));
+                    String duration = validator.getValidDuration();
+                    newTicket.setDuration(validator.convertToMinutes(duration));
+                    newTicket.setDepartureTime(validator.getValidLocalDateTime("Ticket stating date"));
+//                    newTicket.setSoldAt(Date.valueOf(LocalDate.now()).toLocalDate());
                     newTicket.setTicketStatus(validator.choiceOption(TicketStatus.class));
                     this.contractUI.displayValidatedContract();
-
                     String contractId = validator.getValidStringInput("Enter Contract ID: ", "Please enter a valid Contract ID.");
                     Contract contract = contractsServiceImp.getContractWithSpecialOffers(contractId);
                     if (contract != null) {
@@ -113,11 +119,10 @@ public class TicketUI {
                         }
                     }
                 
-                    // Collect updated details for the ticket
                     existingTicket.setTransportationType(validator.choiceOption(TransportationType.class));
                     existingTicket.setBoughtFor(validator.getValidDoubleInput("Enter bought price: ", "Please enter a valid bought price."));
                     existingTicket.setSellingPrice(validator.getValidDoubleInput("Enter selling price: ", "Please enter a valid selling price."));
-                    existingTicket.setSoldAt(Timestamp.valueOf(LocalDateTime.now()));
+//                    existingTicket.setSoldAt(Timestamp.valueOf(LocalDateTime.now()));
                     existingTicket.setTicketStatus(validator.choiceOption(TicketStatus.class));
                 
                     Ticket updatedTicket = ticketServiceImp.updateTicket(existingTicket);
@@ -162,7 +167,7 @@ public class TicketUI {
                     this.displayTickets();
                     break;
 
-                case 0: // Go back
+                case 0:
                     System.out.println("Back to main menu \n");
                     break;
 
@@ -179,7 +184,7 @@ public class TicketUI {
         List<Ticket> ticketsList = ticketServiceImp.getAllTickets();
         
         String[] headers = {
-            "ticketId", "transportationType", "boughtFor", "sellingPrice", "soldAt", "ticketStatus", "contract.contractId"
+            "ticketId", "transportationType", "boughtFor", "sellingPrice", "soldAt", "ticketStatus", "contract.partner.companyName" ,"route.destination" , "route.distance"
         };
 
         DisplayUtil.displayTable(headers, ticketsList);

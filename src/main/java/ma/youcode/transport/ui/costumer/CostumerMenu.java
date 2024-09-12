@@ -1,20 +1,12 @@
-package ma.youcode.transport.ui.admin;
+package ma.youcode.transport.ui.costumer;
 
-import java.sql.SQLException;
 import java.util.Scanner;
-
 import ma.youcode.transport.ui.Menu;
-import ma.youcode.transport.ui.admin.ContractUI;
-import ma.youcode.transport.ui.admin.PartnerUI;
-import ma.youcode.transport.ui.admin.SpecialOfferUI;
-import ma.youcode.transport.ui.admin.TicketUI;
 
 public class CostumerMenu  {
 
     private static  final Scanner sc = new Scanner(System.in);
     private static int choice;
-
-
 
     public static Menu start(Menu menu) {
         do {
@@ -29,10 +21,13 @@ public class CostumerMenu  {
 
             switch (choice) {
                 case 1:
+                    ReservationUI.start(menu);
                     break;
                 case 2:
+                    ProfileUI.start(menu);
                     break;
                 case 0:
+                    System.out.println("Goodbye!");
                     break;
                 default:
                     break;
@@ -43,7 +38,6 @@ public class CostumerMenu  {
     }
 
     public static int getChoice() {
-
         while (choice < 0 || choice > 2) {
             System.out.println("Enter Number Between 0 - 2");
             if (sc.hasNextInt()) {

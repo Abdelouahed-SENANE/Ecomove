@@ -1,17 +1,22 @@
 package ma.youcode.transport.validator;
 
-import java.sql.Timestamp;
+import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 /**
  * A generic validator class for various input types.
  */
 public class Validator {
     private Scanner sc;
-    private static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
-
+    private static final String DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern(DATE_TIME_FORMAT);
     public Validator() {
         sc = new Scanner(System.in);
     }
@@ -37,22 +42,159 @@ public class Validator {
 
     /**
      * Gets a valid timestamp input from the user.
-     * @param prompt The input prompt message.
+     * @param entity The input prompt message.
      * @return A valid timestamp.
      */
-    public Timestamp getValidTimestampInput(String prompt) {
+    public LocalDate getValidLocalDate(String entity) {
         while (true) {
-            System.out.print(prompt);
-            String input = sc.nextLine();
+            int year;
+            while (true) {
+                System.out.print("Please enter the year for the " + entity + " (e.g., 2024): ");
+                if (sc.hasNextInt()) {
+                    year = sc.nextInt();
+                    int currentYear = LocalDate.now().getYear();
+                    if (year < currentYear) {
+                        System.out.println("The year cannot be in the past. Please try again.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid year.");
+                    sc.next();
+                }
+            }
+
+            int month;
+            while (true) {
+                System.out.print("Please enter the month for the " + entity + " (1-12): ");
+                if (sc.hasNextInt()) {
+                    month = sc.nextInt();
+                    if (month < 1 || month > 12) {
+                        System.out.println("Invalid month. Please enter a value between 1 and 12.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid month (1-12).");
+                    sc.next();
+                }
+            }
+
+            int day;
+            while (true) {
+                System.out.print("Please enter the day for the " + entity + " (1-31): ");
+                if (sc.hasNextInt()) {
+                    day = sc.nextInt();
+                    if (day < 1 || day > 31) {
+                        System.out.println("Invalid day. Please enter a value between 1 and 31.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid day (1-31).");
+                    sc.next();
+                }
+            }
             try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-                dateFormat.setLenient(false);
-                return new Timestamp(dateFormat.parse(input).getTime());
-            } catch (ParseException e) {
-                System.out.println("Invalid date format. Please enter the date in the format " + DATE_FORMAT + ".");
+                return LocalDate.of(year, month, day);
+            } catch (DateTimeParseException e) {
+                System.out.println("Invalid date format. Please enter the date in the format yyyy-MM-dd HH:mm.");
+            }catch (Exception e) {
+                System.out.println("Invalid input. Please enter numeric values.");
+                sc.next();
             }
         }
     }
+    public LocalDateTime getValidLocalDateTime(String entity) {
+        while (true) {
+            int year;
+            while (true) {
+                System.out.print("Please enter the year for the " + entity + " (e.g., 2024): ");
+                if (sc.hasNextInt()) {
+                    year = sc.nextInt();
+                    int currentYear = LocalDate.now().getYear();
+                    if (year < currentYear) {
+                        System.out.println("The year cannot be in the past. Please try again.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid year.");
+                    sc.next();
+                }
+            }
+
+            int month;
+            while (true) {
+                System.out.print("Please enter the month for the " + entity + " (1-12): ");
+                if (sc.hasNextInt()) {
+                    month = sc.nextInt();
+                    if (month < 1 || month > 12) {
+                        System.out.println("Invalid month. Please enter a value between 1 and 12.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid month (1-12).");
+                    sc.next();
+                }
+            }
+
+            int day;
+            while (true) {
+                System.out.print("Please enter the day for the " + entity + " (1-31): ");
+                if (sc.hasNextInt()) {
+                    day = sc.nextInt();
+                    if (day < 1 || day > 31) {
+                        System.out.println("Invalid day. Please enter a value between 1 and 31.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid day (1-31).");
+                    sc.next();
+                }
+            }
+
+            int hour;
+            while (true) {
+                System.out.print("Please enter the hour for the " + entity + " (0-23): ");
+                if (sc.hasNextInt()) {
+                    hour = sc.nextInt();
+                    if (hour < 0 || hour > 23) {
+                        System.out.println("Invalid hour. Please enter a value between 0 and 23.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid hour (0-23).");
+                    sc.next();
+                }
+            }
+
+            int min;
+            while (true) {
+                System.out.print("Please enter the minute for the " + entity + " (0-59): ");
+                if (sc.hasNextInt()) {
+                    min = sc.nextInt();
+                    if (min < 0 || min > 59) {
+                        System.out.println("Invalid minute. Please enter a value between 0 and 59.");
+                    } else {
+                        break;
+                    }
+                } else {
+                    System.out.println("Invalid input. Please enter a valid minute (0-59).");
+                    sc.next();  // clear invalid input
+                }
+            }
+            try {
+                return LocalDateTime.of(year, month, day, hour, min);
+            } catch (DateTimeException e) {
+                System.out.println("Invalid date or time combination. Please try again.");
+            }
+        }
+    }
+
 
     /**
      * Gets a valid double input from the user.
@@ -88,6 +230,39 @@ public class Validator {
                 System.out.println(errorMessage);
             }
         }
+    }
+
+    public Integer convertToMinutes(String input) {
+
+        int totalMinutes = 0;
+        String[] hourPart = input.split("h");
+        if (hourPart.length > 0) {
+            int hours = Integer.parseInt(hourPart[0].trim());
+            totalMinutes += hours * 60;
+        }
+        if (hourPart.length > 1) {
+            String minutePart = hourPart[1].replace("min" , "").trim();
+            int minutes = Integer.parseInt(minutePart);
+            totalMinutes += minutes;
+        }
+        return totalMinutes;
+    }
+    public String getValidDuration() {
+        String duration;
+        String REGEX_DURATION = "(\\d+)h(\\d+)min";
+        while (true) {
+            System.out.print("Enter duration e.g(2h15min): ");
+            duration = sc.nextLine();
+            if (duration.matches(REGEX_DURATION)){
+                return duration;
+            }else {
+                System.out.println("Invalid duration. Please try again.");
+            }
+        }
+
+
+
+
     }
 
     /**
@@ -157,4 +332,33 @@ public class Validator {
             sc.nextLine();
         }
     }
+
+
+    public  String isValidEmail(String label , String errorMessage) {
+        String input;
+        String  EMAIL_REGEX = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$";
+        while (true) {
+            System.out.print(label);
+            input = sc.nextLine().trim();
+            if (input.matches(EMAIL_REGEX)) {
+                return input;
+            }else {
+                System.out.println(errorMessage);
+            }
+        }
+    }
+    public String isValidPhoneNumber(String label , String errorMessage) {
+        String input;
+        String  PHONE_REGEX = "^0[5-7]\\d{8}$";
+        while (true) {
+            System.out.print(label);
+            input = sc.nextLine().trim();
+            if (input.matches(PHONE_REGEX)) {
+                return input;
+            }else {
+                System.out.println(errorMessage);
+            }
+        }
+    }
+
 }

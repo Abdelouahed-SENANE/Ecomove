@@ -1,17 +1,17 @@
 package ma.youcode.transport.repository.implementations;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import ma.youcode.transport.config.Database;
 import ma.youcode.transport.entity.Contract;
+import ma.youcode.transport.entity.Route;
 import ma.youcode.transport.entity.Ticket;
 import ma.youcode.transport.enums.TicketStatus;
 import ma.youcode.transport.enums.TransportationType;
+
+import javax.xml.crypto.Data;
 
 public class TicketRepositoryImp implements ma.youcode.transport.repository.TicketRepository {
 
@@ -23,7 +23,7 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
 
     @Override
     public Ticket save(Ticket ticket) {
-        String sql = "INSERT INTO tickets (ticketid, transportationtype, boughtfor, sellingprice, soldat, ticketstatus, contractid) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO tickets (ticketid, transportationtype, boughtfor, sellingprice, soldat, ticketstatus, contractid , routeid , departuretime , duration) VALUES (?, ?, ?, ?, ?, ?, ?,? , ? ,?)";
 
         try {
             Connection cn = db.getConnection();
@@ -33,9 +33,12 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
             stmt.setObject(2, ticket.getTransportationType().name(), java.sql.Types.OTHER);
             stmt.setDouble(3, ticket.getBoughtFor());
             stmt.setDouble(4, ticket.getSellingPrice());
-            stmt.setTimestamp(5, ticket.getSoldAt());
+            stmt.setDate(5,null);
             stmt.setObject(6, ticket.getTicketStatus().name(), java.sql.Types.OTHER);
             stmt.setString(7, ticket.getContract().getContractId());
+            stmt.setString(8, ticket.getRoute().getRouteId());
+            stmt.setTimestamp(9 , Timestamp.valueOf(ticket.getDepartureTime()));
+            stmt.setDouble(10, ticket.getDuration());
 
             int affectedRow = stmt.executeUpdate();
             if (affectedRow > 0) {
@@ -58,7 +61,7 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
             stmt.setObject(1, ticket.getTransportationType().name(), java.sql.Types.OTHER);
             stmt.setDouble(2, ticket.getBoughtFor());
             stmt.setDouble(3, ticket.getSellingPrice());
-            stmt.setTimestamp(4, ticket.getSoldAt());
+            stmt.setDate(4, Date.valueOf(ticket.getSoldAt()));
             stmt.setObject(5, ticket.getTicketStatus().name(), java.sql.Types.OTHER);
             stmt.setString(6, ticket.getTicketId());
 
@@ -105,7 +108,7 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
                 ticket.setTransportationType(TransportationType.valueOf(rs.getString("transportationtype")));
                 ticket.setBoughtFor(rs.getDouble("boughtfor"));
                 ticket.setSellingPrice(rs.getDouble("sellingprice"));
-                ticket.setSoldAt(rs.getTimestamp("soldat"));
+                ticket.setSoldAt(rs.getDate("soldat").toLocalDate());
                 ticket.setTicketStatus(TicketStatus.valueOf(rs.getString("ticketstatus")));
 
                 // Assuming a method exists to retrieve Contract by ID
@@ -122,7 +125,8 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
     @Override
     public List<Ticket> findAllTickets() {
         List<Ticket> tickets = new ArrayList<>();
-        String sql = "SELECT * FROM tickets";
+        String sql = "SELECT * FROM tickets t "+
+                " INNER JOIN routes r ON r.routeid = t.routeid";
 
         try {
             Connection cn = db.getConnection();
@@ -135,14 +139,18 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
                 ticket.setTransportationType(TransportationType.valueOf(rs.getString("transportationtype")));
                 ticket.setBoughtFor(rs.getDouble("boughtfor"));
                 ticket.setSellingPrice(rs.getDouble("sellingprice"));
-                ticket.setSoldAt(rs.getTimestamp("soldat"));
+                ticket.setDuration(rs.getInt("duration"));
+                ticket.setDepartureTime(rs.getTimestamp("departuretime").toLocalDateTime());
                 ticket.setTicketStatus(TicketStatus.valueOf(rs.getString("ticketstatus")));
-
-                // Assuming a method exists to retrieve Contract by ID
+                Route route = new Route();
+                route.setRouteId(rs.getString("routeid"));
+                route.setDeparture(rs.getString("departure"));
+                route.setDestination(rs.getString("destination"));
+                route.setDistance(rs.getDouble("distance"));
+                ticket.setRoute(route);
                 ContractRepositoryImp contractRepo = new ContractRepositoryImp();
                 Contract contract = contractRepo.findContractById(rs.getString("contractid"));
                 ticket.setContract(contract);
-
                 tickets.add(ticket);
             }
         } catch (SQLException e) {

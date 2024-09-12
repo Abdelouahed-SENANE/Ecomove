@@ -1,9 +1,6 @@
 package ma.youcode.transport.repository.implementations;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,8 @@ import ma.youcode.transport.enums.OfferStatus;
 import ma.youcode.transport.repository.ContractRepository;
 import ma.youcode.transport.repository.PartnerRepository;
 import ma.youcode.transport.repository.SpecialOfferRepository;
+
+import javax.xml.crypto.Data;
 
 public class ContractRepositoryImp implements ContractRepository {
 
@@ -34,8 +33,8 @@ public class ContractRepositoryImp implements ContractRepository {
             PreparedStatement stmt = cn.prepareStatement(sql);
 
             stmt.setString(1, contract.getContractId());
-            stmt.setTimestamp(2, contract.getStartingDate());
-            stmt.setTimestamp(3, contract.getEndDate());
+            stmt.setDate(2, Date.valueOf(contract.getStartingDate()));
+            stmt.setDate(3, Date.valueOf(contract.getEndDate()));
             stmt.setDouble(4, contract.getSpecialRate());
             stmt.setString(5, contract.getAgreementConditions());
             stmt.setBoolean(6, contract.getRenewable());
@@ -60,8 +59,8 @@ public class ContractRepositoryImp implements ContractRepository {
             Connection cn = db.getConnection();
             PreparedStatement stmt = cn.prepareStatement(sql);
 
-            stmt.setTimestamp(1, contract.getStartingDate());
-            stmt.setTimestamp(2, contract.getEndDate());
+            stmt.setDate(1, Date.valueOf(contract.getStartingDate()));
+            stmt.setDate(2, Date.valueOf(contract.getEndDate()));
             stmt.setDouble(3, contract.getSpecialRate());
             stmt.setString(4, contract.getAgreementConditions());
             stmt.setBoolean(5, contract.getRenewable());
@@ -116,8 +115,8 @@ public class ContractRepositoryImp implements ContractRepository {
             if (rs.next()) {
                 contract = new Contract();
                 contract.setContractId(rs.getString("contractid"));
-                contract.setStartingDate(rs.getTimestamp("startingdate"));
-                contract.setEndDate(rs.getTimestamp("enddate"));
+                contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                contract.setEndDate(rs.getDate("enddate").toLocalDate());
                 contract.setSpecialRate(rs.getDouble("specialrate"));
                 contract.setAgreementConditions(rs.getString("agreementconditions"));
                 contract.setRenewable(rs.getBoolean("renewable"));
@@ -150,8 +149,8 @@ public class ContractRepositoryImp implements ContractRepository {
             while (rs.next()) {
                 Contract contract = new Contract();
                 contract.setContractId(rs.getString("contractid"));
-                contract.setStartingDate(rs.getTimestamp("startingdate"));
-                contract.setEndDate(rs.getTimestamp("enddate"));
+                contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                contract.setEndDate(rs.getDate("enddate").toLocalDate());
                 contract.setSpecialRate(rs.getDouble("specialrate"));
                 contract.setAgreementConditions(rs.getString("agreementconditions"));
                 contract.setRenewable(rs.getBoolean("renewable"));
@@ -186,8 +185,8 @@ public class ContractRepositoryImp implements ContractRepository {
             while (rs.next()) {
                 Contract contract = new Contract();
                 contract.setContractId(rs.getString("contractid"));
-                contract.setStartingDate(rs.getTimestamp("startingdate"));
-                contract.setEndDate(rs.getTimestamp("enddate"));
+                contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                contract.setEndDate(rs.getDate("enddate").toLocalDate());
                 contract.setSpecialRate(rs.getDouble("specialrate"));
                 contract.setAgreementConditions(rs.getString("agreementconditions"));
                 contract.setRenewable(rs.getBoolean("renewable"));
@@ -228,8 +227,8 @@ public class ContractRepositoryImp implements ContractRepository {
             if (rs.next()) {
                 contract = new Contract();
                 contract.setContractId(rs.getString("contractid"));
-                contract.setStartingDate(rs.getTimestamp("startingdate"));
-                contract.setEndDate(rs.getTimestamp("enddate"));
+                contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                contract.setEndDate(rs.getDate("enddate").toLocalDate());
                 contract.setSpecialRate(rs.getDouble("specialrate"));
                 contract.setAgreementConditions(rs.getString("agreementconditions"));
                 contract.setRenewable(rs.getBoolean("renewable"));

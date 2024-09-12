@@ -1,12 +1,12 @@
 package ma.youcode.transport.repository;
 
-import ma.youcode.transport.entity.Costumer;
+import ma.youcode.transport.entity.Passenger;
 
 public interface AuthRepository {
 
 
-    Costumer findByEmail(String email);
-    Costumer save(Costumer costumer);
+    Passenger findByEmail(String email);
+    Passenger save(Passenger passenger);
     Boolean existsByEmail(String email);
-
+    Passenger update(Passenger passenger);
 }

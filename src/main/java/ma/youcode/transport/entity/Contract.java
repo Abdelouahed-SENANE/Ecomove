@@ -1,14 +1,16 @@
 package ma.youcode.transport.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import ma.youcode.transport.enums.ContractStatus;
 
 public class Contract {
     private String contractId;
-    private Timestamp startingDate;
-    private Timestamp endDate;
+    private LocalDate startingDate;
+    private LocalDate endDate;
     private double specialRate;
     private String agreementConditions;
     private boolean renewable;
@@ -26,19 +28,19 @@ public class Contract {
         this.contractId = contractId;
     }
 
-    public Timestamp getStartingDate() {
+    public LocalDate getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(Timestamp startingDate) {
+    public void setStartingDate(LocalDate startingDate) {
         this.startingDate = startingDate;
     }
 
-    public Timestamp getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
