@@ -73,8 +73,8 @@ public class SpecialOfferUI {
                             "Please enter a correct value for the Offer Name."));
                     newSpecialOffer.setOfferDescription(validator.getValidStringInput("Enter Offer Description: ",
                             "Please enter a correct value for the Offer Description."));
-                    newSpecialOffer.setStartingDate(validator.getValidTimestampInput("Special offer starting date "));
-                    newSpecialOffer.setEndDate(validator.getValidTimestampInput("Special offer ending date "));
+                    newSpecialOffer.setStartingDate(validator.getValidLocalDate("Special offer starting date "));
+                    newSpecialOffer.setEndDate(validator.getValidLocalDate("Special offer ending date "));
                     newSpecialOffer.setDiscountType(validator.choiceOption(DiscountType.class));
                     sc.nextLine();
 
@@ -138,8 +138,8 @@ public class SpecialOfferUI {
                             "Please enter a correct value for the Offer Name."));
                     existingSpecialOffer.setOfferDescription(validator.getValidStringInput("Enter Offer Description: ",
                             "Please enter a correct value for the Offer Description."));
-                    existingSpecialOffer.setStartingDate(validator.getValidTimestampInput("Special offer updated Starting date"));
-                    existingSpecialOffer.setEndDate(validator.getValidTimestampInput("Special offer updated Ending date"));
+                    existingSpecialOffer.setStartingDate(validator.getValidLocalDate("Special offer updated Starting date"));
+                    existingSpecialOffer.setEndDate(validator.getValidLocalDate("Special offer updated Ending date"));
                     existingSpecialOffer.setDiscountType(validator.choiceOption(DiscountType.class));
                     existingSpecialOffer.setDiscountValue(validator.getValidDoubleInput("Enter Discount Value: ",
                             "Please enter a valid discount value."));

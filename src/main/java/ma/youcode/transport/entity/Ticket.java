@@ -1,6 +1,7 @@
 package ma.youcode.transport.entity;
 
-import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import ma.youcode.transport.enums.TicketStatus;
 import ma.youcode.transport.enums.TransportationType;
@@ -10,10 +11,12 @@ public class Ticket {
     private TransportationType transportationType;
     private double boughtFor;
     private double sellingPrice;
-    private Timestamp soldAt;
+    private LocalDate soldAt;
     private TicketStatus ticketStatus;
     private Contract contract;
-
+    private Route route;
+    private LocalDateTime departureTime;
+    private Integer duration;
     public String getTicketId() {
         return ticketId;
     }
@@ -46,11 +49,11 @@ public class Ticket {
         this.sellingPrice = sellingPrice;
     }
 
-    public Timestamp getSoldAt() {
+    public LocalDate getSoldAt() {
         return soldAt;
     }
 
-    public void setSoldAt(Timestamp soldAt) {
+    public void setSoldAt(LocalDate soldAt) {
         this.soldAt = soldAt;
     }
 
@@ -67,5 +70,29 @@ public class Ticket {
     }
     public void setContract(Contract partner) {
         this.contract = partner; 
+    }
+
+    public Route getRoute() {
+        return route;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public void setDepartureTime(LocalDateTime startingDate) {
+        this.departureTime = startingDate;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
     }
 }

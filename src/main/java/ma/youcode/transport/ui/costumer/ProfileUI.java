@@ -24,8 +24,8 @@ public class ProfileUI {
     public static Menu start(Menu menu) {
         do {
             System.out.println("\n================== Profile Menu ==================");
-            System.out.println("1. Update Profile");
-            System.out.println("0. Back to main menu");
+            System.out.println("1. Continue");
+            System.out.println("0. Return to main menu");
             System.out.println("================== Profile Menu ==================\n");
             System.out.println("Choose an option :");
             choice = sc.nextInt();

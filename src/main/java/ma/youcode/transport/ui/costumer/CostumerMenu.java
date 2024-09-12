@@ -2,7 +2,6 @@ package ma.youcode.transport.ui.costumer;
 
 import java.util.Scanner;
 import ma.youcode.transport.ui.Menu;
-import ma.youcode.transport.ui.admin.ReservationUI;
 
 public class CostumerMenu  {
 

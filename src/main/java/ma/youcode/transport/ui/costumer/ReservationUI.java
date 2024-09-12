@@ -1,4 +1,4 @@
-package ma.youcode.transport.ui.admin;
+package ma.youcode.transport.ui.costumer;
 
 import java.util.Scanner;
 
@@ -7,9 +7,8 @@ import ma.youcode.transport.utils.Session;
 
 public class ReservationUI {
 
-    private static  final Scanner sc = new Scanner(System.in);
+    private static final Scanner sc = new Scanner(System.in);
     private static int choice;
-
 
 
     public static Menu start(Menu menu) {
@@ -26,7 +25,13 @@ public class ReservationUI {
 
             switch (choice) {
                 case 1:
-                    System.out.println( "Authenticated User is : " + Session.getLoggedEmail());
+                    System.out.println("You are choice make reservation option \n");
+                    System.out.println("Enter Departure : ");
+                    String departure = sc.next();
+                    System.out.println("Enter Destination : ");
+                    String destination = sc.next();
+
+
                     break;
                 case 2:
                     break;
