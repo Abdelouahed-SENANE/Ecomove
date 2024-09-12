@@ -148,7 +148,6 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
                 route.setDestination(rs.getString("destination"));
                 route.setDistance(rs.getDouble("distance"));
                 ticket.setRoute(route);
-
                 ContractRepositoryImp contractRepo = new ContractRepositoryImp();
                 Contract contract = contractRepo.findContractById(rs.getString("contractid"));
                 ticket.setContract(contract);
