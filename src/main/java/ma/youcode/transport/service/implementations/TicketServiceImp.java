@@ -16,6 +16,7 @@ import ma.youcode.transport.entity.Ticket;
 import ma.youcode.transport.enums.ContractStatus;
 import ma.youcode.transport.enums.DiscountType;
 import ma.youcode.transport.enums.TicketStatus;
+import ma.youcode.transport.enums.TransportationType;
 import ma.youcode.transport.repository.ContractRepository;
 import ma.youcode.transport.repository.RouteRepository;
 import ma.youcode.transport.repository.TicketRepository;
@@ -104,10 +105,11 @@ public class TicketServiceImp implements ma.youcode.transport.service.TicketServ
     }
 
     @Override
-    public List<List<Ticket>> availbeJourneys(String departure, String destination, LocalDateTime departureDateTime) {
+    public List<List<Ticket>> availbeJourneys(String departure, String destination, LocalDateTime departureDateTime , TransportationType type) {
         List<Ticket> tickets = ticketRepository.findAllTickets();
         List<Ticket> validTickets = tickets.stream()
-                .filter(ticket ->  ticket.getDepartureTime().isAfter(departureDateTime))
+                .filter(ticket ->  ticket.getDepartureTime().isAfter(departureDateTime)
+                        && ticket.getContract().getPartner().getTransportationType().equals(type))
                 .collect(Collectors.toList());
 
         Map<String , List<Ticket>> graph = buildGraph(validTickets);

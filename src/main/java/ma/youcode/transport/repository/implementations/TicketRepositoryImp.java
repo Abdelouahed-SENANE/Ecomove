@@ -7,6 +7,7 @@ import java.util.List;
 
 import ma.youcode.transport.config.Database;
 import ma.youcode.transport.entity.Contract;
+import ma.youcode.transport.entity.Partner;
 import ma.youcode.transport.entity.Route;
 import ma.youcode.transport.entity.Ticket;
 import ma.youcode.transport.enums.TicketStatus;
@@ -126,8 +127,10 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
     @Override
     public List<Ticket> findAllTickets() {
         List<Ticket> tickets = new ArrayList<>();
-        String sql = "SELECT * FROM tickets t "+
-                " INNER JOIN routes r ON r.routeid = t.routeid WHERE soldat IS NULL ";
+        String sql = "SELECT * , c.partnerid , p.transportationtype FROM tickets t "+
+                " INNER JOIN contracts c ON c.contractid = t.contractid "
+                + " INNER JOIN partners p ON p.partnerid = c.partnerid "
+                +" INNER JOIN routes r ON r.routeid = t.routeid WHERE soldat IS NULL ";
 
         try {
             Connection cn = db.getConnection();
@@ -149,8 +152,11 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
                 route.setDestination(rs.getString("destination"));
                 route.setDistance(rs.getDouble("distance"));
                 ticket.setRoute(route);
-                ContractRepositoryImp contractRepo = new ContractRepositoryImp();
-                Contract contract = contractRepo.findContractById(rs.getString("contractid"));
+                Contract contract = new Contract();
+                contract.setContractId(rs.getString("contractid"));
+                Partner partner = new Partner();
+                partner.setTransportationType(TransportationType.valueOf(rs.getString("transportationtype")));
+                contract.setPartner(partner);
                 ticket.setContract(contract);
                 tickets.add(ticket);
             }

@@ -2,16 +2,17 @@ package ma.youcode.transport.ui.costumer;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Locale;
-import java.util.Scanner;
-import java.util.UUID;
+import java.util.*;
 
 import ma.youcode.transport.entity.Passenger;
+import ma.youcode.transport.entity.Preference;
 import ma.youcode.transport.entity.Reservation;
 import ma.youcode.transport.entity.Ticket;
+import ma.youcode.transport.enums.TransportationType;
+import ma.youcode.transport.service.PreferenceService;
 import ma.youcode.transport.service.ReservationService;
 import ma.youcode.transport.service.TicketService;
+import ma.youcode.transport.service.implementations.PreferenceServiceImp;
 import ma.youcode.transport.service.implementations.ReservationServiceImp;
 import ma.youcode.transport.service.implementations.TicketServiceImp;
 import ma.youcode.transport.ui.Menu;
@@ -23,6 +24,8 @@ public class ReservationUI {
     private static final Validator validator;
     private static final TicketService  ticketService;
     private static final ReservationService reservationService;
+    private static final PreferenceService preferenceService;
+
     private static final Scanner sc = new Scanner(System.in);
     private static int choice;
 
@@ -30,6 +33,7 @@ public class ReservationUI {
         validator = new Validator();
         ticketService = new TicketServiceImp();
         reservationService = new ReservationServiceImp();
+        preferenceService = new PreferenceServiceImp();
     }
     public static Menu start(Menu menu) {
         do {
@@ -45,13 +49,64 @@ public class ReservationUI {
 
             switch (choice) {
                 case 1:
-                    System.out.println("You are choice make reservation option \n");
-                    sc.nextLine();
-                    String departure = validator.getValidStringInput("Enter your departure : ", "Please Enter valid departure , try again : " );
-                    String destination = validator.getValidStringInput("Enter your destination : ", "Please Enter valid destination , try again : " );;
-                    LocalDateTime departureTime = validator.getValidLocalDateTime("Departure Time for journey  ");
+                    System.out.println("You have chosen the 'Make Reservation' option.\n");
 
-                    List<List<Ticket>> availableRoutes = ticketService.availbeJourneys(departure , destination , departureTime);
+                    System.out.println("Would you like to search using your saved preferences? (yes/no): ");
+                    String option = sc.next();
+                    List<List<Ticket>> availableRoutes = new ArrayList<>();
+                    String departure , destination;
+                    LocalDateTime departureTime;
+                    TransportationType type;
+                    Preference preference;
+                    if (option.equals("yes")) {
+                        List<Preference> preferences = preferenceService.getMyPreferences();
+                        if (preferences.size() > 0) {
+                            displayPreferences(preferences);
+                            System.out.println("Choose your preference: ");
+                            int preferenceIndex = sc.nextInt();
+                            while (preferenceIndex < 1 || preferenceIndex > preferences.size()) {
+                                System.out.println("Please enter a valid preference number: ");
+                                preferenceIndex = sc.nextInt();
+                            }
+                            Preference selectedPreference = preferences.get(preferenceIndex - 1);
+                            departure = selectedPreference.getPreferredDeparture();
+                            destination = selectedPreference.getPreferredDestination();
+                            departureTime = selectedPreference.getPreferredDepartureTime();
+                            type = selectedPreference.getPreferredTransportationType();
+                            availableRoutes = ticketService.availbeJourneys(departure, destination, departureTime, type);
+                        } else {
+                            System.out.println("No saved preferences found. Switching to manual search.");
+
+                            departure = validator.getValidStringInput("Enter your departure: ", "Please enter a valid departure, try again: ");
+                            destination = validator.getValidStringInput("Enter your destination: ", "Please enter a valid destination, try again: ");
+                            departureTime = validator.getValidLocalDateTime("Departure Time for journey: ");
+                            type = validator.choiceOption(TransportationType.class);
+                            availableRoutes = ticketService.availbeJourneys(departure, destination, departureTime ,type);
+                            preference = new Preference();
+                            preference.setPreferenceId(UUID.randomUUID().toString());
+                            preference.setPreferredDeparture(departure);
+                            preference.setPreferredDepartureTime(departureTime);
+                            preference.setPreferredDestination(destination);
+                            preference.setPreferredTransportationType(type);
+                            Passenger passenger = new Passenger();
+                            passenger.setEmail(Session.getLoggedEmail());
+                            preference.setPassenger(passenger);
+                            System.out.println("Do you would to save this like a preference? (yes/no): ");
+                            String request = sc.next();
+                            if (request.equals("yes")) {
+                                preferenceService.addPreference(preference);
+                            }
+                        }
+                    } else {
+                        departure = validator.getValidStringInput("Enter your departure: ", "Please enter a valid departure, try again: ");
+                        destination = validator.getValidStringInput("Enter your destination: ", "Please enter a valid destination, try again: ");
+                        departureTime = validator.getValidLocalDateTime("Departure Time for journey: ");
+                        type = validator.choiceOption(TransportationType.class);
+                        availableRoutes = ticketService.availbeJourneys(departure, destination, departureTime , type);
+                    }
+
+
+
                     if (availableRoutes.size() > 0) {
                         System.out.println(displayJourneysInCards(availableRoutes));
                         int choiceJourney;
@@ -72,6 +127,7 @@ public class ReservationUI {
                         Reservation savedReservation = reservationService.addReservation(newReservation);
                         if (savedReservation != null) {
                             System.out.println("Reservation made successfully ");
+                            sc.nextLine();
                         }else {
                             System.out.println("Reservation not made");
                         }
@@ -80,7 +136,6 @@ public class ReservationUI {
                         System.out.println("|  There are no available routes for departure  |");
                         System.out.println("|_______________________________________________|");
                     }
-
                     break;
                 case 2:
 
@@ -169,9 +224,14 @@ public static String displayJourneysInCards(List<List<Ticket>> allJourneys) {
     DateTimeFormatter customFormatter = DateTimeFormatter.ofPattern("d, MMMM yyyy, HH'h'mm'min'", Locale.ENGLISH);
 
     for (List<Ticket> journey : allJourneys) {
+        Double price = 0.00;
+        for (Ticket ticket : journey) {
+            price += ticket.getSellingPrice();
+            System.out.println("Prices " + ticket.getSellingPrice());
+        }
         sb.append("┌──────────────────────────────────────────────┐\n")
                 .append("│  Journey ").append(journeyNumber)
-                .append(String.format("%" + (45 - (String.valueOf(journeyNumber).length() + 10)) + "s", "Ticket N* " + journeyNumber)).append(" \n")
+                .append(String.format("%" + (45 - (String.valueOf(journeyNumber).length() + 10)) + "s", "Price -->" + price + "$" )).append(" \n")
                 .append("├──────────────────────────────────────────────┤\n");
 
         for (Ticket ticket : journey) {
@@ -229,6 +289,36 @@ public static String displayJourneysInCards(List<List<Ticket>> allJourneys) {
     }
 
 
+    public static void displayPreferences(List<Preference> preferences) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d, MMMM yyyy, HH'h'mm'min'", Locale.ENGLISH);
+        int BOX_WIDTH = 50;
+        // Check if preferences are available
+        if (preferences.size() > 0) {
+            for (int i = 0; i < preferences.size(); i++) {
+                Preference preference = preferences.get(i);
+                // Print each preference in a box-like format with a header
+                System.out.println(" _______________________________________________ ");
+                System.out.println("| Preference #" + (i + 1) + "                                |");
+                System.out.println("| Departure City: " + formatString(preference.getPreferredDeparture(), BOX_WIDTH - 21) + " |");
+                System.out.println("| Arrival City: " + formatString(preference.getPreferredDestination(), BOX_WIDTH - 16) + " |");
+                System.out.println("| Departure Time: " + formatString(preference.getPreferredDepartureTime().format(formatter), BOX_WIDTH - 22) + " |");
+                System.out.println("| Transportation Type: " + formatString(preference.getPreferredTransportationType().toString(), BOX_WIDTH - 28) + " |");
+                System.out.println("|_______________________________________________|");
+                System.out.println(); // Add a blank line between preferences
+            }
+        } else {
+            System.out.println("No saved preferences found.");
+        }
+    }
+
+    // Helper method to format strings with a fixed width
+    private static String formatString(String input, int width) {
+        if (input.length() > width) {
+            return input.substring(0, width - 3) + "..."; // Truncate long strings
+        } else {
+            return String.format("%-" + width + "s", input); // Pad strings to the specified width
+        }
+    }
 
 
 

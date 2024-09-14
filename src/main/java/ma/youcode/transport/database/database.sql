@@ -56,3 +56,14 @@ CREATE TABLE IF NOT EXISTS tickets (
     FOREIGN KEY (contractId) REFERENCES contracts(contractId)
 
 );
+
+
+CREATE table  if not exists preferences (
+    id VARCHAR(255) PRIMARY KEY Not NULL,
+    passengeremail VARCHAR(255) ,
+    foreign key (passengeremail) references passengers(email),
+    preferreddeparture VARCHAR(255),
+    preferreddestination VARCHAR(255),
+    transportationtype transportation_type,
+    preferredTime Timestamp
+    )
