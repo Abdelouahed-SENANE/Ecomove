@@ -1,6 +1,7 @@
 package ma.youcode.transport.repository.implementations;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,11 +31,11 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
             PreparedStatement stmt = cn.prepareStatement(sql);
 
             stmt.setString(1, ticket.getTicketId());
-            stmt.setObject(2, ticket.getTransportationType().name(), java.sql.Types.OTHER);
+            stmt.setObject(2, ticket.getTransportationType().name(),Types.OTHER);
             stmt.setDouble(3, ticket.getBoughtFor());
             stmt.setDouble(4, ticket.getSellingPrice());
             stmt.setDate(5,null);
-            stmt.setObject(6, ticket.getTicketStatus().name(), java.sql.Types.OTHER);
+            stmt.setObject(6, TicketStatus.PENDING , Types.OTHER);
             stmt.setString(7, ticket.getContract().getContractId());
             stmt.setString(8, ticket.getRoute().getRouteId());
             stmt.setTimestamp(9 , Timestamp.valueOf(ticket.getDepartureTime()));
@@ -58,11 +59,11 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
             Connection cn = db.getConnection();
             PreparedStatement stmt = cn.prepareStatement(sql);
 
-            stmt.setObject(1, ticket.getTransportationType().name(), java.sql.Types.OTHER);
+            stmt.setObject(1, ticket.getTransportationType().name(), Types.OTHER);
             stmt.setDouble(2, ticket.getBoughtFor());
             stmt.setDouble(3, ticket.getSellingPrice());
             stmt.setDate(4, Date.valueOf(ticket.getSoldAt()));
-            stmt.setObject(5, ticket.getTicketStatus().name(), java.sql.Types.OTHER);
+            stmt.setObject(5, ticket.getTicketStatus().name(), Types.OTHER);
             stmt.setString(6, ticket.getTicketId());
 
             int affectedRow = stmt.executeUpdate();
@@ -126,7 +127,7 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
     public List<Ticket> findAllTickets() {
         List<Ticket> tickets = new ArrayList<>();
         String sql = "SELECT * FROM tickets t "+
-                " INNER JOIN routes r ON r.routeid = t.routeid";
+                " INNER JOIN routes r ON r.routeid = t.routeid WHERE soldat IS NULL ";
 
         try {
             Connection cn = db.getConnection();
@@ -157,5 +158,28 @@ public class TicketRepositoryImp implements ma.youcode.transport.repository.Tick
             e.printStackTrace();
         }
         return tickets;
+    }
+
+    @Override
+    public Boolean updateStatus(Ticket ticket) {
+
+        String updateStatusSQL = "UPDATE tickets SET ticketstatus = ?, soldat = ? WHERE ticketid = ?";
+        try{
+            Connection connection = db.getConnection();
+            PreparedStatement pstmt = connection.prepareStatement(updateStatusSQL);
+
+                pstmt.setObject(1, TicketStatus.SOLD , java.sql.Types.OTHER);
+                pstmt.setTimestamp(2 , Timestamp.valueOf(LocalDateTime.now()));
+                pstmt.setString(3, ticket.getTicketId());
+                int  affectedRow = pstmt.executeUpdate();
+
+                if (affectedRow > 0) {
+                    return true;
+                }
+
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
     }
 }

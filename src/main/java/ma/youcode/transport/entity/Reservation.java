@@ -1,9 +1,12 @@
 package ma.youcode.transport.entity;
 
+import java.util.List;
+
 public class Reservation {
     private String reservationId;
     private String cancelledAt;
     private Passenger passenger;
+    private List<Ticket> tickets;
 
     public String getReservationId() {
         return reservationId;
@@ -27,5 +30,12 @@ public class Reservation {
 
     public void setCancelledAt(String cancelledAt) {
         this.cancelledAt = cancelledAt;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+    public void setTickets(List<Ticket> reservations) {
+        this.tickets = reservations;
     }
 }

@@ -13,5 +13,5 @@ public interface TicketService {
     Ticket deleteTicket(String ticketId);
     Ticket getTicket(String ticketId);
     List<List<Ticket>> availbeJourneys(String departure, String destination, LocalDateTime departureDateTime);
-
+    Boolean markAsSold( Ticket ticket);
 }

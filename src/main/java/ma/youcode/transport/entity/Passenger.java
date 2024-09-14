@@ -1,10 +1,14 @@
 package ma.youcode.transport.entity;
 
+import java.util.List;
+
 public class Passenger {
     private String firstName;
     private String familyName;
     private String email;
     private String phone;
+    private List<Reservation> reservations;
+
 
     public String getFirstName() {
         return firstName;

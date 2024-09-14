@@ -15,6 +15,7 @@ import ma.youcode.transport.entity.SpecialOffer;
 import ma.youcode.transport.entity.Ticket;
 import ma.youcode.transport.enums.ContractStatus;
 import ma.youcode.transport.enums.DiscountType;
+import ma.youcode.transport.enums.TicketStatus;
 import ma.youcode.transport.repository.ContractRepository;
 import ma.youcode.transport.repository.RouteRepository;
 import ma.youcode.transport.repository.TicketRepository;
@@ -36,7 +37,6 @@ public class TicketServiceImp implements ma.youcode.transport.service.TicketServ
     @Override
     public Ticket addTicket(Ticket ticket)  {
 
-        Route getRoute = routeRepository.findRoute(ticket.getRoute());
 
         Route existingRoute = routeRepository.findRoute(ticket.getRoute());
 
@@ -176,4 +176,8 @@ public class TicketServiceImp implements ma.youcode.transport.service.TicketServ
         return differenceInMillis / (1000 * 60 * 60);
 
     }
+        @Override
+        public Boolean markAsSold(Ticket ticket) {
+            return this.ticketRepository.updateStatus(ticket);
+        }
 }

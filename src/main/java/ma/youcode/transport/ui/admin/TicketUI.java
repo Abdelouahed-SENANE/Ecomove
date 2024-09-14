@@ -76,8 +76,6 @@ public class TicketUI {
                     String duration = validator.getValidDuration();
                     newTicket.setDuration(validator.convertToMinutes(duration));
                     newTicket.setDepartureTime(validator.getValidLocalDateTime("Ticket stating date"));
-//                    newTicket.setSoldAt(Date.valueOf(LocalDate.now()).toLocalDate());
-                    newTicket.setTicketStatus(validator.choiceOption(TicketStatus.class));
                     this.contractUI.displayValidatedContract();
                     String contractId = validator.getValidStringInput("Enter Contract ID: ", "Please enter a valid Contract ID.");
                     Contract contract = contractsServiceImp.getContractWithSpecialOffers(contractId);

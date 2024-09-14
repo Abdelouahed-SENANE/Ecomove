@@ -16,6 +16,6 @@ public interface TicketRepository {
     Ticket findTicketById(String ticketId);
 
     List<Ticket> findAllTickets();
-
+    Boolean updateStatus(Ticket ticket);
 
 }

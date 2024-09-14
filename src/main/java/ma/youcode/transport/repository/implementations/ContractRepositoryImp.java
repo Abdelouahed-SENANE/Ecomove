@@ -2,7 +2,9 @@ package ma.youcode.transport.repository.implementations;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import ma.youcode.transport.config.Database;
 import ma.youcode.transport.entity.Contract;
@@ -173,7 +175,8 @@ public class ContractRepositoryImp implements ContractRepository {
 
     @Override
     public List<Contract> findValidatedContract() {
-        List<Contract> contracts = new ArrayList<>();
+        Map<String , Contract> contractMap = new HashMap<>();
+
         String sql = "SELECT * FROM contracts c "+
                 "INNER JOIN partners p ON p.partnerid = c.partnerid "+
                 "INNER JOIN specialoffers os ON os.contractid = c.contractid "+
@@ -182,35 +185,39 @@ public class ContractRepositoryImp implements ContractRepository {
             Connection cn = db.getConnection();
             PreparedStatement stmt = cn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
+            Contract contract;
             while (rs.next()) {
-                Contract contract = new Contract();
-                contract.setContractId(rs.getString("contractid"));
-                contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
-                contract.setEndDate(rs.getDate("enddate").toLocalDate());
-                contract.setSpecialRate(rs.getDouble("specialrate"));
-                contract.setAgreementConditions(rs.getString("agreementconditions"));
-                contract.setRenewable(rs.getBoolean("renewable"));
-                contract.setContractStatus(ContractStatus.valueOf(rs.getString("contractstatus")));
+                String contractId = rs.getString("contractid");
+                if (contractMap.containsKey(contractId)) {
+                     contract = contractMap.get(contractId);
+                }else {
+                    contract = new Contract();
+                    contract.setContractId(rs.getString("contractid"));
+                    contract.setStartingDate(rs.getDate("startingdate").toLocalDate());
+                    contract.setEndDate(rs.getDate("enddate").toLocalDate());
+                    contract.setSpecialRate(rs.getDouble("specialrate"));
+                    contract.setAgreementConditions(rs.getString("agreementconditions"));
+                    contract.setRenewable(rs.getBoolean("renewable"));
+                    contract.setSpecialOffers(new ArrayList<>());
+                    contract.setContractStatus(ContractStatus.valueOf(rs.getString("contractstatus")));
+                    contractMap.put(contractId, contract);
+                }
+
                 Partner partner = new Partner();
                 partner.setPartnerId(rs.getString("partnerid"));
                 partner.setCompanyName(rs.getString("companyname"));
                 contract.setPartner(partner);
-                List<SpecialOffer> speciaOffers = new ArrayList<>();
                 SpecialOffer specialOffer = new SpecialOffer();
                 specialOffer.setOfferId(rs.getString("offerid"));
                 specialOffer.setOfferName(rs.getString("offername"));
                 specialOffer.setOfferStatus(OfferStatus.valueOf(rs.getString("offerstatus")));
-                speciaOffers.add(specialOffer);
-                contract.setSpecialOffers(speciaOffers);
-                contracts.add(contract);
+                contract.getSpecialOffers().add(specialOffer);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        for (Contract contract : contracts) {
-            System.out.println("Contract Id : " + contract.getContractId());
-        }
-        return contracts;
+
+        return new ArrayList<>(contractMap.values());
     }
 
     @Override
