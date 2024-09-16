@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="222b2b75-941b-4025-82c3-d1fb84531e10" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/config/Database.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/config/Database.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/database/database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/database/database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Contract.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Contract.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Partner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Partner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Passenger.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Passenger.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Preference.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Preference.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Reservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Reservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Route.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Route.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/SpecialOffer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/SpecialOffer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/entity/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/entity/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/AuthStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/AuthStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/ContractStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/ContractStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/DiscountType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/DiscountType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/OfferStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/OfferStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/PartnershipStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/PartnershipStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/TicketStatus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/TicketStatus.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/enums/TransportationType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/enums/TransportationType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/AuthRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/AuthRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/ContractRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/ContractRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/PartnerRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/PartnerRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/PreferenceRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/PreferenceRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/ReservationRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/ReservationRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/RouteRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/RouteRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/SpecialOfferRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/SpecialOfferRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/TicketRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/TicketRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/AuthRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/AuthRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/ContractRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/ContractRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/PartnerRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/PartnerRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/PreferenceRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/PreferenceRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/ReservationRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/ReservationRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/RouteRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/RouteRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/SpecialOfferRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/SpecialOfferRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/repository/implementations/TicketRepositoryImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/repository/implementations/TicketRepositoryImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/ContractService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/PartenerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/PartenerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/PreferenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/PreferenceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/SpecialOfferService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/SpecialOfferService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/TicketService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/TicketService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/AuthServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/AuthServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/ContractServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/ContractServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/PartnersServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/PartnersServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/PreferenceServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/PreferenceServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/ReservationServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/ReservationServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/SpecialOfferServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/SpecialOfferServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/service/implementations/TicketServiceImp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/service/implementations/TicketServiceImp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/Menu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/admin/AdminMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/admin/AdminMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/admin/ContractUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/admin/ContractUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/admin/PartnerUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/admin/PartnerUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/admin/SpecialOfferUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/admin/SpecialOfferUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/admin/TicketUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/admin/TicketUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/auth/AuthMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/auth/AuthMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/costumer/CostumerMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/costumer/CostumerMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/costumer/ProfileUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/costumer/ProfileUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/ui/costumer/ReservationUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/ui/costumer/ReservationUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/utils/DisplayUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/utils/DisplayUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/utils/Session.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/utils/Session.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ma/youcode/transport/validator/Validator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ma/youcode/ecomove/validator/Validator.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Abdelouahed-SENANE&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;git@github.com:Abdelouahed-SENANE/Ecomove.git&quot;,
+    &quot;accountId&quot;: &quot;9362407a-6509-43e2-b1fa-1b0449d6dd36&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2m9UMuLLE5cU0FqKrKPskkBSdI4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.App.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;v2.0&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/youcode/Desktop/Workplace/baticuisine&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="ecomove" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-b114ca120d71-intellij.indexing.shared.core-IU-242.21829.142" />
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-IU-242.21829.142" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="222b2b75-941b-4025-82c3-d1fb84531e10" name="Changes" comment="" />
+      <created>1726488242720</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726488242720</updated>
+      <workItem from="1726488244479" duration="39000" />
+      <workItem from="1726488295454" duration="89000" />
+      <workItem from="1726488534063" duration="24000" />
+      <workItem from="1726488905718" duration="106000" />
+      <workItem from="1726489324782" duration="66000" />
+      <workItem from="1726489431919" duration="144000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
